@@ -12,40 +12,49 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+---------------------------------------------------------
+-- telescope and related plugins
   use {
 	'nvim-telescope/telescope.nvim', tag = '0.1.1',
 	-- or                            , branch = '0.1.x',
 	requires = { {'nvim-lua/plenary.nvim'} }
   }
+  use 'nvim-telescope/telescope-fzy-native.nvim'
+  use {
+      'sudormrfbin/cheatsheet.nvim',
 
+        requires = {  {'nvim-lua/popup.nvim'}, }
+      }
+---------------------------------------
+-- Themes 
   use ({ 'EdenEast/nightfox.nvim',
   	as = "nightfox",
 	config = function()
---		vim.cmd('colorscheme carbonfox')
+    --	vim.cmd('colorscheme carbonfox')
 	end})
 
-    use ({ 'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'}})
+  use { "catppuccin/nvim", as = "catppuccin" }
+-----------------------------------------
+-- Treesitter 
+  use ({ 'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'}})
    --  use 'nvim-treesitter/playground'
-    use 'ThePrimeagen/harpoon'
-    use 'mbbill/undotree'
-    use 'tpope/vim-fugitive'
-    -- Lua
+------------------------------------- 
+--harpoon
+  use 'ThePrimeagen/harpoon'
+--------------------------------- 
+--undotree
+  use 'mbbill/undotree'
+  use 'tpope/vim-fugitive'
+  -- Lua
 
-    use {
+  use {
         "folke/trouble.nvim",
         requires = "nvim-tree/nvim-web-devicons",
-        config = function()
-            require("trouble").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
-        end
     }
 
-    use { "catppuccin/nvim", as = "catppuccin" }
-    use {
-	    'VonHeikemen/lsp-zero.nvim',
+------------------------------------------------------ 
+--LSP 
+  use { 'VonHeikemen/lsp-zero.nvim',
 	    branch = 'v1.x',
 	    requires = {
 		    -- LSP Support
@@ -66,12 +75,18 @@ return require('packer').startup(function(use)
 		    {'rafamadriz/friendly-snippets'}, -- Optional
 	    }
     }
-    use {
+----------------------------------------------------- 
+--Visuals and assorted requires
+  use {
     "nvim-lualine/lualine.nvim",
     requires = {
       "kyazdani42/nvim-web-devicons",
     }
   }
-    use 'ryanoasis/vim-devicons'
-    use 'nvim-lua/plenary.nvim'
+  use 'ryanoasis/vim-devicons'
+  use 'nvim-lua/plenary.nvim'
+---------------------------------------------------- 
+-- vim-be-good
+  use 'ThePrimeagen/vim-be-good'
+
 end)
