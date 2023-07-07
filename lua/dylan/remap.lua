@@ -17,10 +17,12 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", "\"_dP")
 
+-- leader y to add to system clipboard
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
+-- leader d to delete but don't copy to register
 vim.keymap.set("v", "<leader>d", "\"_d")
 vim.keymap.set("n", "<leader>d", "\"_d")
 
@@ -28,7 +30,7 @@ vim.keymap.set("i", "<C-c>", "<ESC>")
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-vim.keymap.set("n", "<leader>f", function()
+vim.keymap.set("n", "<leader>bf", function()
     vim.lsp.buf.format()
 end)
 
@@ -43,7 +45,7 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- Enter Explorer
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
--- Sorce currunt file
+-- Sorce current file
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
