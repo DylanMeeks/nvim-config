@@ -31,17 +31,19 @@ local plugins = {
     },
     ---------------------------------------
     -- Themes
-    'EdenEast/nightfox.nvim',
+    { 'EdenEast/nightfox.nvim' },
 
-    "catppuccin/nvim",
-    name = "catppuccin",
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+    },
     -----------------------------------------
     -- Treesitter
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     --   'nvim-treesitter/playground'
     -------------------------------------
     --harpoon
-    'ThePrimeagen/harpoon',
+    {'ThePrimeagen/harpoon'},
     ---------------------------------
     --undotree
     'mbbill/undotree',
@@ -55,14 +57,14 @@ local plugins = {
 
     ------------------------------------------------------
     --LSP
+    { 'williamboman/mason.nvim' },           -- Optional
+    { 'williamboman/mason-lspconfig.nvim' }, -- Optional
     {
         'VonHeikemen/lsp-zero.nvim',
-        branch = 'v1.x',
+        branch = 'v3.x',
         dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },             -- Required
-            { 'williamboman/mason.nvim' },           -- Optional
-            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },         -- Required
@@ -96,7 +98,7 @@ local plugins = {
         "iamcco/markdown-preview.nvim",
         build = "cd app && npm install",
         init  = function() vim.g.mkdp_filetypes = { "markdown" } end,
-        ft = { "markdown" },
+        ft    = { "markdown" },
     }
 }
 
