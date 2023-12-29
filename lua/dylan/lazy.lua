@@ -37,13 +37,19 @@ local plugins = {
         "catppuccin/nvim",
         name = "catppuccin",
     },
+    {
+        "ellisonleao/gruvbox.nvim",
+        priority = 1000,
+        config = true,
+        opts = ...
+    },
     -----------------------------------------
     -- Treesitter
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     --   'nvim-treesitter/playground'
     -------------------------------------
     --harpoon
-    {'ThePrimeagen/harpoon'},
+    { 'ThePrimeagen/harpoon' },
     ---------------------------------
     --undotree
     'mbbill/undotree',
@@ -64,7 +70,7 @@ local plugins = {
         branch = 'v3.x',
         dependencies = {
             -- LSP Support
-            { 'neovim/nvim-lspconfig' },             -- Required
+            { 'neovim/nvim-lspconfig' }, -- Required
 
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },         -- Required
