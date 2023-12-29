@@ -25,7 +25,7 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
     -- Replace the language servers listed here
     -- with the ones you want to install
-    ensure_installed = { 'lua_ls', 'rust_analyzer', 'clangd' },
+    ensure_installed = { 'lua_ls', 'rust_analyzer', 'clangd', 'hls' },
     handlers = {
         lsp_zero.default_setup,
         lua_ls = function()
@@ -58,8 +58,11 @@ require('mason-lspconfig').setup({
         rust_analyzer = function()
             require('lspconfig').rust_analyzer.setup({})
         end,
-        clangd = function ()
-           require('lspconfig').clangd.setup({})
+        clangd = function()
+            require('lspconfig').clangd.setup({})
+        end,
+        hls = function()
+            require('lspconfig').hls.setup({})
         end,
     },
 })
