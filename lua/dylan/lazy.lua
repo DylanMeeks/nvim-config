@@ -12,8 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = ' '
-
 local plugins = {
     ---------------------------------------------------------
     -- telescope and related plugins
@@ -31,22 +29,13 @@ local plugins = {
     },
     ---------------------------------------
     -- Themes
-    { 'EdenEast/nightfox.nvim' },
-
-    {
-        "catppuccin/nvim",
-        name = "catppuccin",
-    },
-    {
-        "ellisonleao/gruvbox.nvim",
-        priority = 1000,
-        config = true,
-        opts = ...
-    },
+    { "EdenEast/nightfox.nvim" },
+    { "catppuccin/nvim" },
+    { "ellisonleao/gruvbox.nvim", },
+    { "rebelot/kanagawa.nvim", },
     -----------------------------------------
     -- Treesitter
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-    --   'nvim-treesitter/playground'
     -------------------------------------
     --harpoon
     { 'ThePrimeagen/harpoon' },
@@ -93,21 +82,9 @@ local plugins = {
             "nvim-tree/nvim-web-devicons",
         }
     },
-    'ryanoasis/vim-devicons',
     'nvim-lua/plenary.nvim',
-    ----------------------------------------------------
-    -- vim-be-good
-    'ThePrimeagen/vim-be-good',
-    ----------------------------------------------------
-    -- markdown-preview
-    {
-        "iamcco/markdown-preview.nvim",
-        build = "cd app && npm install",
-        init  = function() vim.g.mkdp_filetypes = { "markdown" } end,
-        ft    = { "markdown" },
-    }
 }
 
 local opts = {}
 
-require("lazy").setup(plugins, opts)
+require("lazy").setup({plugins, opts})
