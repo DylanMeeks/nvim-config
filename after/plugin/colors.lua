@@ -26,6 +26,8 @@ local colors = {
     red      = '#cc241d',
 }
 
+local dragon_colors = require("kanagawa.colors").setup({ theme = 'dragon' })
+
 local conditions = {
     buffer_not_empty = function()
         return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
@@ -85,50 +87,7 @@ local function ins_right(component)
     table.insert(config.sections.lualine_x, component)
 end
 
--- ins_left {
---   function()
---     return '▊'
---   end,
---   color = { fg = colors.blue }, -- Sets highlighting of component
---   padding = { left = 0, right = 0 }, -- We don't need space before this
--- }
-
--- ins_left {
---   -- mode component
---   function()
---     return vim.fn.mode()
---   end,
---   color = function()
---     -- auto change color according to neovims mode
---     local mode_color = {
---       n = colors.red,
---       i = colors.green,
---       v = colors.blue,
---       [''] = colors.blue,
---       V = colors.blue,
---       c = colors.magenta,
---       no = colors.red,
---       s = colors.orange,
---       S = colors.orange,
---       [''] = colors.orange,
---       ic = colors.yellow,
---       R = colors.violet,
---       Rv = colors.violet,
---       cv = colors.red,
---       ce = colors.red,
---       r = colors.cyan,
---       rm = colors.cyan,
---       ['r?'] = colors.cyan,
---       ['!'] = colors.red,
---       t = colors.red,
---     }
---     return { fg = mode_color[vim.fn.mode()] }
---   end,
---   padding = { right = 1 },
--- }
-
 ins_left({
-    -- filesize component
     'filesize',
     cond = conditions.buffer_not_empty,
 })
@@ -136,23 +95,23 @@ ins_left({
 ins_left({
     'filename',
     cond = conditions.buffer_not_empty,
-    color = { fg = colors.magenta, gui = 'bold' },
+    color = { fg = colors.magenta },
 })
 
 ins_left({ 'location' })
 
-ins_left({ 'progress', color = { fg = colors.fg, gui = 'bold' } })
+ins_left({ 'progress', color = { fg = colors.fg } })
 
-ins_left({
-    'diagnostics',
-    sources = { 'nvim_diagnostic' },
-    symbols = { error = 'E ', warn = 'W ', info = 'I ' },
-    diagnostics_color = {
-        color_error = { fg = colors.red },
-        color_warn = { fg = colors.yellow },
-        color_info = { fg = colors.cyan },
-    },
-})
+-- ins_left({
+--     'diagnostics',
+--     sources = { 'nvim_diagnostic' },
+--     symbols = { error = 'E ', warn = 'W ', info = 'I ' },
+--     diagnostics_color = {
+--         color_error = { fg = colors.red },
+--         color_warn = { fg = colors.yellow },
+--         color_info = { fg = colors.cyan },
+--     },
+-- })
 
 -- Insert mid section. You can make any number of sections in neovim :)
 -- for lualine it's any number greater then 2
