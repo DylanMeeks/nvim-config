@@ -29,8 +29,9 @@ vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("i", "<C-c>", "<ESC>")
 
 vim.keymap.set("n", "Q", "<nop>")
--- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tms switch<CR>")
+-- vim.keymap.set("n", "<C-f>", "<cmd>silent !tms switch<CR>")
+
 vim.keymap.set("n", "<leader>bf", function()
     vim.lsp.buf.format()
 end)
