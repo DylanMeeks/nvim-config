@@ -83,6 +83,9 @@ local plugins = {
         }
     },
     'nvim-lua/plenary.nvim',
+    -----------------------------------------------------
+    -- Wakatime
+    { 'wakatime/vim-wakatime', lazy = false }
 }
 
 local opts = {}
