@@ -25,7 +25,7 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
     -- Replace the language servers listed here
     -- with the ones you want to install
-    ensure_installed = { 'lua_ls', 'rust_analyzer', 'clangd', 'hls' },
+    ensure_installed = { 'lua_ls', 'rust_analyzer', 'clangd' },
     handlers = {
         lsp_zero.default_setup,
         lua_ls = function()
@@ -61,9 +61,6 @@ require('mason-lspconfig').setup({
         clangd = function()
             require('lspconfig').clangd.setup({})
         end,
-        hls = function()
-            require('lspconfig').hls.setup({})
-        end,
     },
 })
 
@@ -80,9 +77,9 @@ cmp.setup({
     },
     formatting = lsp_zero.cmp_format(),
     mapping = cmp.mapping.preset.insert({
-        ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
         ['<C-Space>'] = cmp.mapping.complete(),
     }),
 })
