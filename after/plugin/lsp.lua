@@ -28,18 +28,15 @@ require('mason-lspconfig').setup({
         'lua_ls',
         'rust_analyzer',
         'clangd',
-        'verible'
+        'verible',
     },
     handlers = {
         function(server_name)
-            require('lspconfig')[server_name].setup({
-                capabilities = capabilities,
-            })
+            require('lspconfig')[server_name].setup({})
         end,
         ["lua_ls"] = function()
             local lspconfig = require("lspconfig")
             lspconfig.lua_ls.setup({
-                capabilities = capabilities,
                 settings = {
                     Lua = {
                         diagnostics = {
@@ -61,19 +58,20 @@ cmp.setup({
             require('luasnip').lsp_expand(args.body)
         end,
     },
-    sources = {
-        { name = 'path' },
-        { name = 'nvim_lsp' },
-        { name = 'nvim_lua' },
-        { name = 'luasnip' },
-        { name = 'buffer' },
-    },
-    formatting = lsp_zero.cmp_format({ details = true }),
     mapping = cmp.mapping.preset.insert({
         ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
         ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
         ['<C-y>'] = cmp.mapping.confirm({ select = true }),
         ['<C-Space>'] = cmp.mapping.complete(),
     }),
+    sources = cmp.config.sources({
+        {
+            { name = 'nvim_lsp' },
+            -- { name = 'nvim_lua' },
+            { name = 'luasnip' },
+        }, {
+            { name = 'buffer' },
+    } }),
+    formatting = lsp_zero.cmp_format({ details = true }),
 })
 lsp_zero.setup()

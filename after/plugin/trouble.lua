@@ -1,15 +1,14 @@
-local trouble =  require("trouble")
+local trouble = require("trouble")
 
-trouble.setup()
+trouble.setup({ icons = false })
 
 -- Lua
-vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
-
+vim.keymap.set("n", "<leader>xx", "<cmd>Trouble<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
 
 -- Commands
 
@@ -38,10 +37,10 @@ local trouble_sources = require("trouble.sources.telescope")
 local telescope = require("telescope")
 
 telescope.setup {
-  defaults = {
-    mappings = {
-      i = { ["<c-t>"] = trouble_sources.open },
-      n = { ["<c-t>"] = trouble_sources.open },
+    defaults = {
+        mappings = {
+            i = { ["<c-t>"] = trouble_sources.open },
+            n = { ["<c-t>"] = trouble_sources.open },
+        },
     },
-  },
 }
