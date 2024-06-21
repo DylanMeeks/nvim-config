@@ -1,4 +1,3 @@
---- Bootstrap Lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -12,6 +11,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require("lazy").setup({
+    spec = "dylan.lazy",
+    change_detection = {notify = false},
+})
+
+--[[
 local plugins = {
     ---------------------------------------------------------
     -- telescope and related plugins
@@ -76,18 +81,10 @@ local plugins = {
     { 'williamboman/mason-lspconfig.nvim' }, -- Optional
     -----------------------------------------------------
     --Visuals and assorted dependencies
-    {
-        "nvim-lualine/lualine.nvim",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-        }
-    },
-    'nvim-lua/plenary.nvim',
+   'nvim-lua/plenary.nvim',
     -----------------------------------------------------
     -- Wakatime
     { 'wakatime/vim-wakatime', lazy = false }
 }
+--]]
 
-local opts = {}
-
-require("lazy").setup({ plugins, opts })
