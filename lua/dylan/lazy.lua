@@ -17,7 +17,7 @@ local plugins = {
     -- telescope and related plugins
     {
         'nvim-telescope/telescope.nvim',
-        version = '0.1.1',
+        version = '0.1.5',
         dependencies = { { 'nvim-lua/plenary.nvim' } }
     },
     'nvim-telescope/telescope-fzy-native.nvim',
@@ -52,8 +52,6 @@ local plugins = {
 
     ------------------------------------------------------
     --LSP
-    { 'williamboman/mason.nvim' },           -- Optional
-    { 'williamboman/mason-lspconfig.nvim' }, -- Optional
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
@@ -74,6 +72,8 @@ local plugins = {
             { 'rafamadriz/friendly-snippets' }, -- Optional
         }
     },
+    { 'williamboman/mason.nvim' },           -- Optional
+    { 'williamboman/mason-lspconfig.nvim' }, -- Optional
     -----------------------------------------------------
     --Visuals and assorted dependencies
     {
@@ -90,4 +90,4 @@ local plugins = {
 
 local opts = {}
 
-require("lazy").setup({plugins, opts})
+require("lazy").setup({ plugins, opts })
