@@ -33,15 +33,15 @@ vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", {silent = tru
 --    loclist: items from the window's location lis
 
 local actions = require("telescope.actions")
-local trouble_provider = require("trouble.providers.telescope")
+local trouble_sources = require("trouble.sources.telescope")
 
 local telescope = require("telescope")
 
 telescope.setup {
   defaults = {
     mappings = {
-      i = { ["<c-t>"] = trouble_provider.open_with_trouble },
-      n = { ["<c-t>"] = trouble_provider.open_with_trouble },
+      i = { ["<c-t>"] = trouble_sources.open },
+      n = { ["<c-t>"] = trouble_sources.open },
     },
   },
 }
