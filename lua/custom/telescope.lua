@@ -9,7 +9,8 @@ require("telescope").setup({
 
 		fzf = {},
 		history = {
-			path = vim.fs.joinpath(data, "telescope_history.sqlite3"),
+			path = vim.fs.joinpath(data, "databases/telescope_history.sqlite3"),
+            --path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
 			limit = 100,
 		},
 		media_files = {

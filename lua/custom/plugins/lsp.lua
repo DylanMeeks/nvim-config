@@ -58,31 +58,6 @@ return {
 				pyright = true,
 				mojo = { manual_install = true },
 
-				-- Enabled biome formatting, turn off all the other ones generally
-				biome = true,
-				-- tsserver = {
-				--	server_capabilities = {
-				--		documentFormattingProvider = false,
-				--	},
-				--},
-				--jsonls = {
-				--	server_capabilities = {
-				--		documentFormattingProvider = false,
-				--	},
-				--	settings = {
-				--		json = {
-				--			schemas = require("schemastore").json.schemas(),
-				--			validate = { enable = true },
-				--		},
-				--	},
-				--},
-
-				-- cssls = {
-				--   server_capabilities = {
-				--     documentFormattingProvider = false,
-				--   },
-				-- },
-
 				yamlls = {
 					settings = {
 						yaml = {
@@ -175,6 +150,44 @@ return {
 				lua = true,
 			}
 
+			-- Autoformatting Setup
+			local conform = require("conform")
+			conform.setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
+					blade = { "blade-formatter" },
+				},
+			})
+
+			conform.formatters.injected = {
+				options = {
+					ignore_errors = false,
+					lang_to_formatters = {
+						sql = { "sleek" },
+					},
+				},
+			}
+
+			-- This is autoformat on write
+			--[[
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                callback = function(args)
+                    -- local filename = vim.fn.expand "%:p"
+
+                    local extension = vim.fn.expand("%:e")
+                    if extension == "mlx" then
+                        return
+                    end
+
+                    require("conform").format({
+                        bufnr = args.buf,
+                        lsp_fallback = true,
+                        quiet = true,
+                    })
+                end,
+            })
+            --]]
+
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)
 					local bufnr = args.buf
@@ -194,9 +207,15 @@ return {
 					vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
 
-					vim.keymap.set("n", "<space>cr", vim.lsp.buf.rename, { buffer = 0 })
-					vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, { buffer = 0 })
-					vim.keymap.set("n", "<space>wd", builtin.lsp_document_symbols, { buffer = 0 })
+					vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = 0 })
+					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
+					vim.keymap.set("n", "<leader>wd", builtin.lsp_document_symbols, { buffer = 0 })
+					vim.keymap.set("n", "<leader>bf", function()
+						conform.format({
+							lsp_fallback = true,
+							quiet = true,
+						})
+					end, { buffer = 0 })
 
 					local filetype = vim.bo[bufnr].filetype
 					if disable_semantic_tokens[filetype] then
@@ -214,41 +233,6 @@ return {
 							client.server_capabilities[k] = v
 						end
 					end
-				end,
-			})
-
-			-- Autoformatting Setup
-			local conform = require("conform")
-			conform.setup({
-				formatters_by_ft = {
-					lua = { "stylua" },
-					blade = { "blade-formatter" },
-				},
-			})
-
-			conform.formatters.injected = {
-				options = {
-					ignore_errors = false,
-					lang_to_formatters = {
-						sql = { "sleek" },
-					},
-				},
-			}
-
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				callback = function(args)
-					-- local filename = vim.fn.expand "%:p"
-
-					local extension = vim.fn.expand("%:e")
-					if extension == "mlx" then
-						return
-					end
-
-					require("conform").format({
-						bufnr = args.buf,
-						lsp_fallback = true,
-						quiet = true,
-					})
 				end,
 			})
 
