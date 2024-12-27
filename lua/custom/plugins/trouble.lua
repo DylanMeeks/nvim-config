@@ -7,7 +7,7 @@ return {
             trouble.setup({ icons = false })
 
             vim.keymap.set("n", "<leader>tt", function()
-                require("trouble").toggle()
+                require("trouble").toggle({mode = quickfix})
             end)
 
             vim.keymap.set("n", "[t", function()

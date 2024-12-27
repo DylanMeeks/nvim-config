@@ -1,8 +1,9 @@
+local filetype = require "vim.filetype"
 return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"folke/neodev.nvim",
+			"folke/lazydev.nvim",
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -17,11 +18,12 @@ return {
 			"b0o/SchemaStore.nvim",
 		},
 		config = function()
-			require("neodev").setup({
-				-- library = {
-				--   plugins = { "nvim-dap-ui" },
-				--   types = true,
-				-- },
+			require("lazydev").setup({
+				library = {
+					-- See the configuration section for more details
+					-- Load luvit types when the `vim.uv` word is found
+					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				},
 			})
 
 			local capabilities = nil
@@ -56,8 +58,10 @@ return {
 				rust_analyzer = true,
 
 				pyright = true,
-				mojo = { manual_install = true },
+				pylyzer = true,
+				-- mojo = { manual_install = true },
 
+                --[[
 				yamlls = {
 					settings = {
 						yaml = {
@@ -69,8 +73,9 @@ return {
 						},
 					},
 				},
+                --]]
 
-				ols = {},
+				-- ols = {},
 
 				ocamllsp = {
 					manual_install = true,
@@ -114,6 +119,7 @@ return {
 
 					filetypes = { "c" },
 				},
+
 			}
 
 			local servers_to_install = vim.tbl_filter(function(key)
@@ -126,6 +132,7 @@ return {
 			end, vim.tbl_keys(servers))
 
 			require("mason").setup()
+
 			local ensure_installed = {
 				"stylua",
 				"lua_ls",
@@ -133,6 +140,7 @@ return {
 			}
 
 			vim.list_extend(ensure_installed, servers_to_install)
+
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			for name, config in pairs(servers) do
@@ -143,7 +151,7 @@ return {
 					capabilities = capabilities,
 				}, config)
 
-				lspconfig[name].setup(config)
+					lspconfig[name].setup(config)
 			end
 
 			local disable_semantic_tokens = {

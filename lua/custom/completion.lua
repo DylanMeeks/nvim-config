@@ -23,23 +23,6 @@ local kind_formatter = lspkind.cmp_format({
 local cmp = require("cmp")
 
 cmp.setup({
-	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "path" },
-		{ name = "buffer" },
-		{ name = "pandoc_references" },
-	},
-	mapping = {
-		["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-		["<C-y>"] = cmp.mapping(
-			cmp.mapping.confirm({
-				behavior = cmp.ConfirmBehavior.Insert,
-				select = true,
-			}),
-			{ "i", "c" }
-		),
-	},
 
 	-- Enable luasnip to handle snippet expansion for nvim-cmp
 	snippet = {
@@ -47,6 +30,27 @@ cmp.setup({
 			vim.snippet.expand(args.body)
 		end,
 	},
+
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "path" },
+		{ name = "buffer" },
+		{ name = "pandoc_references" },
+	},
+
+	mapping = {
+		["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+		["<C-y>"] = cmp.mapping( function ()
+            cmp.confirm({
+                behavior = cmp.ConfirmBehavior.Insert,
+                select = true,
+            })
+        end,
+			{ "i", "c" }
+		),
+	},
+
 
 	formatting = {
 		fields = { "abbr", "kind", "menu" },
