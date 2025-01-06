@@ -14,12 +14,32 @@ return {
 			require("mellifluous").setup({
 				styles = { -- see :h attr-list for options. set {} for NONE, { option = true } for option
 					main_keywords = { italic = true },
-                    comments = { italic = true },
+					comments = { italic = true },
 				},
 			}) -- optional, see configuration section.
 			vim.cmd("colorscheme mellifluous")
-            vim.cmd("Mellifluous kanagawa_dragon")
+			vim.cmd("Mellifluous kanagawa_dragon")
 		end,
+	},
+	{
+		"zenbones-theme/zenbones.nvim",
+		-- Optionally install Lush. Allows for more configuration or extending the colorscheme
+		-- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+		-- In Vim, compat mode is turned on as Lush only works in Neovim.
+		dependencies = "rktjmp/lush.nvim",
+		lazy = false,
+		priority = 1000,
+		-- you can set set configuration options here
+		config = function()
+			vim.g.zenbones_transparent_background = true
+			-- vim.cmd.colorscheme('zenbones')
+		end,
+	},
+	{
+		"uZer/pywal16.nvim",
+		-- config = function()
+		-- 	vim.cmd.colorscheme("pywal16")
+		-- end,
 	},
 	--[[
 	{
