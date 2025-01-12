@@ -35,6 +35,7 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "path" },
 		{ name = "buffer" },
+        { name = 'render-markdown' },
 		{ name = "pandoc_references" },
 	},
 
@@ -64,6 +65,7 @@ cmp.setup({
 	},
 })
 
+--[[
 -- Setup up vim-dadbod
 cmp.setup.filetype({ "sql" }, {
 	sources = {
@@ -71,3 +73,4 @@ cmp.setup.filetype({ "sql" }, {
 		{ name = "buffer" },
 	},
 })
+--]]
