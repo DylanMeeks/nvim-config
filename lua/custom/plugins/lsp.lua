@@ -35,6 +35,7 @@ return {
 
 			local servers = {
 
+                hdl_checker = true,
 				marksman = true,
 				-- taplo = true,
 				bashls = true,
@@ -178,14 +179,6 @@ return {
 				end
 				return select(1, ...)
 			end
-
-			require("conform").setup({
-				formatters_by_ft = {
-					markdown = function(bufnr)
-						return { first(bufnr, "prettierd", "prettier"), "injected" }
-					end,
-				},
-			})
 
 			-- Autoformatting Setup
 			local conform = require("conform")
