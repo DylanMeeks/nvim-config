@@ -16,6 +16,7 @@ return {
 					main_keywords = { italic = true },
 					comments = { italic = true },
 				},
+                transparent_background = { enabled = true }
 			}) -- optional, see configuration section.
 			vim.cmd("colorscheme mellifluous")
 			vim.cmd("Mellifluous kanagawa_dragon")
