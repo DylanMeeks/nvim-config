@@ -1,4 +1,4 @@
-local filetype = require "vim.filetype"
+local filetype = require("vim.filetype")
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -34,7 +34,14 @@ return {
 			local lspconfig = require("lspconfig")
 
 			local servers = {
+
+				marksman = true,
+				-- taplo = true,
 				bashls = true,
+                mutt_ls = true,
+				-- checkmake = true,
+				autotools_ls = true,
+				beautysh = true,
 				gopls = {
 					settings = {
 						gopls = {
@@ -61,7 +68,7 @@ return {
 				pylyzer = true,
 				-- mojo = { manual_install = true },
 
-                --[[
+				--[[
 				yamlls = {
 					settings = {
 						yaml = {
@@ -119,7 +126,6 @@ return {
 
 					filetypes = { "c" },
 				},
-
 			}
 
 			local servers_to_install = vim.tbl_filter(function(key)
@@ -151,7 +157,7 @@ return {
 					capabilities = capabilities,
 				}, config)
 
-					lspconfig[name].setup(config)
+				lspconfig[name].setup(config)
 			end
 
 			local disable_semantic_tokens = {
@@ -163,7 +169,8 @@ return {
 			conform.setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
-					blade = { "blade-formatter" },
+                    sh = { "beautysh" },
+					-- blade = { "blade-formatter" },
 				},
 			})
 
