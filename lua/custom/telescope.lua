@@ -1,4 +1,6 @@
 local data = assert(vim.fn.stdpath("data")) --[[@as string]]
+-- local actions = require("telescope.actions")
+-- local open_with_trouble = require("trouble.sources.telescope").open
 
 require("telescope").setup({
 	defaults = {
@@ -10,7 +12,7 @@ require("telescope").setup({
 		fzf = {},
 		history = {
 			path = vim.fs.joinpath(data, "databases/telescope_history.sqlite3"),
-            --path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
+			--path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
 			limit = 100,
 		},
 		media_files = {
