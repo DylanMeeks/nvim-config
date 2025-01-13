@@ -38,7 +38,7 @@ return {
 				marksman = true,
 				-- taplo = true,
 				bashls = true,
-                mutt_ls = true,
+				mutt_ls = true,
 				-- checkmake = true,
 				autotools_ls = true,
 				beautysh = true,
@@ -169,7 +169,7 @@ return {
 			conform.setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
-                    sh = { "beautysh" },
+					sh = { "beautysh" },
 					-- blade = { "blade-formatter" },
 				},
 			})
@@ -226,11 +226,19 @@ return {
 					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
 					vim.keymap.set("n", "<leader>wd", builtin.lsp_document_symbols, { buffer = 0 })
 					vim.keymap.set("n", "<leader>bf", function()
-						conform.format({
-							lsp_fallback = true,
-							quiet = true,
-						})
-					end, { buffer = 0 })
+						require("conform").format({ async = true }, function(err)
+							if not err then
+								local mode = vim.api.nvim_get_mode().mode
+								if vim.startswith(string.lower(mode), "v") then
+									vim.api.nvim_feedkeys(
+										vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
+										"n",
+										true
+									)
+								end
+							end
+						end)
+					end, { desc = "Format code" })
 
 					local filetype = vim.bo[bufnr].filetype
 					if disable_semantic_tokens[filetype] then
