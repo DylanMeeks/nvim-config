@@ -35,10 +35,11 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
+		-- { name = "pandoc_references" },
+	}, {
 		{ name = "path" },
 		{ name = "buffer" },
 		{ name = "render-markdown" },
-		{ name = "pandoc_references" },
 	}),
 
 	mapping = cmp.mapping.preset.insert({
@@ -73,7 +74,19 @@ cmp.setup.filetype("gitcommit", {
 		{ name = "buffer" },
 	}),
 })
-require("cmp_git").setup()
+require("cmp_git").setup({})
+
+vim.diagnostic.config({
+	-- update_in_insert = true,
+	float = {
+		focusable = false,
+		style = "minimal",
+		border = "rounded",
+		source = true,
+		header = "",
+		prefix = "",
+	},
+})
 
 --[[
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
